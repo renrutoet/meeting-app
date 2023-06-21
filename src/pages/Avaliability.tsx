@@ -1,11 +1,10 @@
-//DO PERSON STATE VIA CONTEXT
-
 import { Link } from "react-router-dom";
+import { CenteredContent } from "../components/Layout/CenterContent";
 
 export const Avaliability = () => {
   return (
-    <div className="content">
-      <div>
+    <CenteredContent>
+      <div className="m-4 min-h-[200px] flex-grow">
         <div>
           Great so in that timeframe on what days is the first person avaliable?
         </div>
@@ -14,6 +13,6 @@ export const Avaliability = () => {
       <Link to="/result">
         <button>Continue</button>
       </Link>
-    </div>
+    </CenteredContent>
   );
 };
