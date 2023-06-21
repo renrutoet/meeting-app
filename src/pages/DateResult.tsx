@@ -4,7 +4,7 @@ import { CenteredContent } from "../components/Layout/CenterContent";
 export const DateResult = () => {
   return (
     <CenteredContent>
-      <div className="m-4 min-h-[200px] flex-grow">
+      <div className="m-4 min-grow">
         <div>
           Thanks again! Hopefully there is a date which works for you both
         </div>

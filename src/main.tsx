@@ -1,17 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.tsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import { Timeframe } from "./pages/Timeframe.tsx";
 import { DateResult } from "./pages/DateResult.tsx";
 import { Avaliability } from "./pages/Avaliability.tsx";
 import { ConfirmDate } from "./pages/ConfirmDate.tsx";
+import { Welcome } from "./pages/Welcome.tsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <Welcome />,
   },
   {
     path: "/timeframe",

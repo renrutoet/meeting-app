@@ -4,7 +4,7 @@ import { CenteredContent } from "../components/Layout/CenterContent";
 export const Timeframe = () => {
   return (
     <CenteredContent>
-      <div className="m-4 min-h-[200px] flex-grow">
+      <div className="m-4 min-grow">
         <div>You want the meeting in the next?</div>
         <div>TIMEFRAME SELECTOR</div>
       </div>

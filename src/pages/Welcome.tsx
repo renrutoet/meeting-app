@@ -4,7 +4,7 @@ import { CenteredContent } from "../components/Layout/CenterContent";
 export const Welcome = () => {
   return (
     <CenteredContent>
-      <div className="m-4 min-h-[200px] flex-grow">
+      <div className="m-4 min-grow">
         <h4>Welcome to Let's make a meeting!</h4>
         <div>
           You need to find a date for the two of you and it's a nightmare

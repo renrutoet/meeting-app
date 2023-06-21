@@ -4,7 +4,7 @@ import { CenteredContent } from "../components/Layout/CenterContent";
 export const Avaliability = () => {
   return (
     <CenteredContent>
-      <div className="m-4 min-h-[200px] flex-grow">
+      <div className="m-4 min-grow">
         <div>
           Great so in that timeframe on what days is the first person avaliable?
         </div>
