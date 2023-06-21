@@ -22,11 +22,11 @@ const router = createBrowserRouter([
     element: <Avaliability />,
   },
   {
-    path: "/result/",
+    path: "/result",
     element: <DateResult />,
   },
   {
-    path: "/confirm/",
+    path: "/confirm",
     element: <ConfirmDate />,
   },
 ]);

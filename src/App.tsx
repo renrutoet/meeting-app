@@ -5,9 +5,6 @@ function App() {
   return (
     <>
       <Welcome />
-      <div>
-        Thanks again! Hopefully there is a date which works for you both
-      </div>
     </>
   );
 }

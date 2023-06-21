@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export const Welcome = () => {
   return (
     <div>
@@ -7,7 +9,9 @@ export const Welcome = () => {
         back and forth about when you are avaliable, sound familiar?
       </div>
       <div>Let me help you with that...</div>
-      <a href="/timeframe">Continue</a>
+      <Link to="/timeframe">
+        <button>Continue</button>
+      </Link>
     </div>
   );
 };
