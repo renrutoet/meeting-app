@@ -7,6 +7,8 @@ import { DateResult } from "./pages/DateResult.tsx";
 import { Avaliability } from "./pages/Avaliability.tsx";
 import { ConfirmDate } from "./pages/ConfirmDate.tsx";
 import { Welcome } from "./pages/Welcome.tsx";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +35,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
+      <RouterProvider router={router} />
+    </LocalizationProvider>
   </React.StrictMode>
 );

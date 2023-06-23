@@ -1,10 +1,14 @@
 import { Link } from "react-router-dom";
 import { CenteredContent } from "../components/Layout/CenterContent";
 import { useState } from "react";
-import DatePicker from "react-datepicker";
+import { DateCalendar } from "@mui/x-date-pickers";
+import dayjs from "dayjs";
 
 export const Avaliability = () => {
-  const [startDate, setStartDate] = useState(new Date());
+  const [selectedDates, setSelectedDates] = useState(null);
+
+  console.log("DATES", selectedDates);
+
   return (
     <>
       <CenteredContent>
@@ -15,16 +19,15 @@ export const Avaliability = () => {
           </div>
 
           <div>SELECT DAYS</div>
+          <DateCalendar
+            value={selectedDates}
+            onChange={(newValue) => setSelectedDates(newValue)}
+          />
         </div>
         <Link to="/result">
           <button>Continue</button>
         </Link>
       </CenteredContent>
-      <DatePicker
-        selected={startDate}
-        onChange={(date: any) => setStartDate(date)}
-        inline
-      />
     </>
   );
 };
