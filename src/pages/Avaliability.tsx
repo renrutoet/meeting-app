@@ -2,12 +2,15 @@ import { Link } from "react-router-dom";
 import { CenteredContent } from "../components/Layout/CenterContent";
 import { useState } from "react";
 import { DateCalendar } from "@mui/x-date-pickers";
-import dayjs, { Dayjs } from "dayjs";
+import { Dayjs } from "dayjs";
 import { Day } from "../components/Layout/CustomCalendar";
 
 export const Avaliability = () => {
-  const [dates, setDates] = useState<Dayjs[] | null>([dayjs("2022-04-18")]);
+  const [dates, setDates] = useState<Dayjs[] | null>([]);
   const [value, setValue] = useState<Dayjs | null>(null);
+
+  // console.log("value", value);
+  console.log("dates", dates);
 
   return (
     <>
@@ -20,8 +23,33 @@ export const Avaliability = () => {
           <DateCalendar
             value={value}
             onChange={(newValue) => {
-              setValue(newValue);
-              setDates((prevState) => [...(prevState as any), newValue]);
+              const mappedDates = dates?.map((day) => day.toISOString());
+              const index =
+                newValue && mappedDates?.indexOf(newValue?.toISOString());
+
+              const isNewSelection = !(
+                newValue && mappedDates?.includes(newValue.toISOString())
+              );
+
+              if (isNewSelection) {
+                setValue(newValue);
+                setDates((prevState) => [...(prevState as any), newValue]);
+              } else {
+                const temp = [...dates];
+                temp.splice(index, 1);
+                setDates(temp);
+
+                if (
+                  temp.length !== 0 &&
+                  newValue.toISOString() === value?.toISOString()
+                ) {
+                  setValue(temp[0]);
+                }
+
+                if (temp.length === 0) {
+                  setValue(null);
+                }
+              }
             }}
             slots={{ day: Day }}
             slotProps={{
