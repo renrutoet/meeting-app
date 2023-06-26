@@ -3,14 +3,48 @@ import { CenteredContent } from "../components/Layout/CenterContent";
 import { useState } from "react";
 import { DateCalendar } from "@mui/x-date-pickers";
 import { Dayjs } from "dayjs";
-import { Day } from "../components/Layout/CustomCalendar";
+import { CustomDayProps, Day } from "../components/Layout/CustomCalendar";
+import { removeFromArr } from "../utils/arrUtils";
 
 export const Avaliability = () => {
-  const [dates, setDates] = useState<Dayjs[] | null>([]);
-  const [value, setValue] = useState<Dayjs | null>(null);
+  const [dates, setDates] = useState<Dayjs[]>([]);
+  const [lastestDate, setLatestDate] = useState<Dayjs | null>(null);
 
-  // console.log("value", value);
-  console.log("dates", dates);
+  const removeDate = removeFromArr(dates);
+
+  const handleChange = (clickedDate: Dayjs | null) => {
+    if (clickedDate === null) {
+      throw new Error("null click");
+    }
+    if (dates === null) {
+      throw new Error("no dates");
+    }
+
+    const mappedDates = dates.map((day) => day.toISOString());
+    const formattedClickedDate = clickedDate.toISOString();
+    const clickedDateIndex = mappedDates.indexOf(formattedClickedDate);
+
+    const isNewSelection =
+      !mappedDates.includes(formattedClickedDate) || lastestDate === null;
+
+    if (isNewSelection) {
+      setLatestDate(clickedDate);
+      setDates((prevState) => [...prevState, clickedDate]);
+    } else {
+      const updatedDates = removeDate(clickedDateIndex);
+      setDates(updatedDates);
+
+      const areRemainingSelections =
+        updatedDates.length !== 0 &&
+        formattedClickedDate === lastestDate.toISOString();
+
+      if (areRemainingSelections) {
+        setLatestDate(updatedDates[0]);
+      } else if (updatedDates.length === 0) {
+        setLatestDate(null);
+      }
+    }
+  };
 
   return (
     <>
@@ -21,48 +55,20 @@ export const Avaliability = () => {
             avaliable?
           </div>
           <DateCalendar
-            value={value}
-            onChange={(newValue) => {
-              const mappedDates = dates?.map((day) => day.toISOString());
-              const index =
-                newValue && mappedDates?.indexOf(newValue?.toISOString());
-
-              const isNewSelection = !(
-                newValue && mappedDates?.includes(newValue.toISOString())
-              );
-
-              if (isNewSelection) {
-                setValue(newValue);
-                setDates((prevState) => [...(prevState as any), newValue]);
-              } else {
-                const temp = [...dates];
-                temp.splice(index, 1);
-                setDates(temp);
-
-                if (
-                  temp.length !== 0 &&
-                  newValue.toISOString() === value?.toISOString()
-                ) {
-                  setValue(temp[0]);
-                }
-
-                if (temp.length === 0) {
-                  setValue(null);
-                }
-              }
-            }}
+            value={lastestDate}
+            onChange={handleChange}
             slots={{ day: Day }}
             slotProps={{
               day: {
-                selectedDay: value,
+                selectedDay: lastestDate,
                 allSelectedDates: dates,
-              } as any,
+              } as CustomDayProps,
             }}
           />
           <button
             onClick={() => {
               setDates([]);
-              setValue(null);
+              setLatestDate(null);
             }}
           >
             Reset Dates
