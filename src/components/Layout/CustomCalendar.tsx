@@ -1,6 +1,5 @@
 import { Dayjs } from "dayjs";
 import { styled } from "@mui/material/styles";
-
 import { PickersDay, PickersDayProps } from "@mui/x-date-pickers/PickersDay";
 import { removeFromArr } from "../../utils/arrUtils";
 import { useContext, useState } from "react";
@@ -26,12 +25,19 @@ const CustomPickersDay = styled(PickersDay, {
       backgroundColor: theme.palette.primary.dark,
     },
   }),
+  ...(!isSelected && {
+    // backgroundColor: theme.palette.secondary.main,
+    color: theme.palette.common.white,
+    "&:hover, &:focus": {
+      backgroundColor: theme.palette.primary.main,
+    },
+  }),
 })) as React.ComponentType<CustomPickerDayProps>;
 
 export function Day(props: CustomDayProps) {
   const { day, selectedDay, allSelectedDates, ...other } = props;
 
-  if (selectedDay == null || allSelectedDates == null) {
+  if (selectedDay === null || allSelectedDates === null) {
     return <PickersDay day={day} {...other} />;
   }
 
